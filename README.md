@@ -4,7 +4,7 @@ This MATLAB script presents an experimental task where participants are shown a 
 
 ## Description
 
-This repository contains a MATLAB script designed for an experimental task where participants view a sequence of colored circles. Participants are required to respond to specific stimuli by pressing a key. The script has potential integration points with transcranial magnetic stimulation (TMS) devices.
+This repository contains a MATLAB script designed for an experimental task where participants view a sequence of colored circles. Participants are required to respond to specific stimuli (green circle) by pressing the spacebar. The script has potential integration points with transcranial magnetic stimulation (TMS) devices.
 
 ## Prerequisites
 
