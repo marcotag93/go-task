@@ -6,6 +6,13 @@ This MATLAB script presents an experimental task where participants are shown a 
 
 This repository contains a MATLAB script designed for an experimental task where participants view a sequence of colored circles. Participants are required to respond to specific stimuli by pressing a key. The script has potential integration points with transcranial magnetic stimulation (TMS) devices.
 
+## Prerequisites
+
+Before running the script, ensure you have the following:
+
+- MATLAB installed on your system.
+- [Psychtoolbox](http://psychtoolbox.org/) installed in MATLAB. This toolbox is essential for the visual stimulus presentation and response collection functionalities of the script.
+
 ## Features
 
 - **Stimulus Presentation**: Presents circles in various colors: grey, yellow, green, and white.
