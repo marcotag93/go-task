@@ -51,7 +51,3 @@ To run the experiment:
 
 If you find any bugs or would like to improve the script, please open an issue or submit a pull request.
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
