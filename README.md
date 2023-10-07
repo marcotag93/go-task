@@ -19,7 +19,16 @@ Before running the script, ensure you have the following:
 - **Variable Timing**: The grey circle's appearance duration is random between 1000-3000ms. The yellow circle, which might be associated with a TMS stimulus, also has a variable appearance time.
 - **TMS Integration**: Contains commented-out sections for sending signals to a TMS device using the `io64` function. This can be activated for experiments that require TMS stimulation.
 - **Response Collection**: Monitors for keypresses to log reaction times and categorizes responses based on the timing of the keypress in relation to the visual stimulus.
-- **Data Saving**: Saves trial data, including reaction times and other relevant parameters, to a `.mat` file. If an existing file has the same name, the script appends a counter to the filename to ensure no data is overwritten.
+- **Data Saving**: 
+  - Saves trial data to a `.mat` file.
+  - `trial_struct` is the main saved structure containing:
+    1. Trial number.
+    2. Trial type (color name where the key was pressed) or NaN if no keypress was detected.
+    3. Reaction time (time taken to press the key) or NaN if no keypress was detected.
+    4. Total trial time (duration of the entire trial).
+    5. Variable value of the grey circle.
+    6. Variable value of the yellow circle.
+  - If an existing file has the same name, the script appends a counter to the filename to ensure no data is overwritten.
 - **User Input**: Prompts the experimenter at the start to enter a subject number and run number, which are used in naming the saved data file.
 - **Features**: Press 'q' to close the experiment; press 'spacebar' during the experiment as a response for the response collection.
 
