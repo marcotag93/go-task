@@ -16,17 +16,18 @@ Before running the script, ensure you have the following:
 ## Features
 
 - **Stimulus Presentation**: Presents circles in various colors: grey, yellow, green, and white.
-- **Variable Timing**: The grey circle's appearance duration is random between 1001-3001ms. The yellow circle, which might be associated with a TMS stimulus, also has a variable appearance time.
+- **Variable Timing**: The grey circle's appearance duration is random between 1000-3000ms. The yellow circle, which might be associated with a TMS stimulus, also has a variable appearance time.
 - **TMS Integration**: Contains commented-out sections for sending signals to a TMS device using the `io64` function. This can be activated for experiments that require TMS stimulation.
 - **Response Collection**: Monitors for keypresses to log reaction times and categorizes responses based on the timing of the keypress in relation to the visual stimulus.
 - **Data Saving**: Saves trial data, including reaction times and other relevant parameters, to a `.mat` file. If an existing file has the same name, the script appends a counter to the filename to ensure no data is overwritten.
 - **User Input**: Prompts the experimenter at the start to enter a subject number and run number, which are used in naming the saved data file.
+- **Features**: Press 'q' to close the experiment; press 'spacebar' during the experiment as a response for the response collection.
 
 ## Setup
 
 1. Clone this repository or download the source files.
 2. Ensure that the `functions` folder is in the same directory as the main script. This folder contains necessary functions that the script relies upon.
-3. If integrating with TMS, uncomment the relevant sections of the code and ensure the TMS device is properly connected and configured.
+3. If integrating with TMS, uncomment the relevant sections of the code inside the function and ensure the TMS device is properly connected and configured. The TMS code needs the io64 parallel port driver correctly installed. This part of the code can be moved in other steps inside the function if needed. 
 
 ## Usage
 
@@ -35,7 +36,7 @@ To run the experiment:
 1. Open MATLAB and navigate to the directory containing the script.
 2. Run the main script.
 3. When prompted, enter the relevant subject and run numbers.
-4. Follow the on-screen instructions for the experiment.
+4. Follow the on-screen instructions for the experiment. 
 
 ## Contributing
 
