@@ -5,14 +5,14 @@ path_functions = 'functions';
 addpath(genpath(path_functions)); % add folder with functions 
 
 %% Variables 
-nTrials = 4;
-prompt = {'Enter subject number:','Enter run number:'};
+prompt = {'Enter subject number:','Enter run number:', 'Enter number of trials:'};
 dlgtitle = 'Input';
 dims = [1 35];
-definput = {'01','001'};
+definput = {'01','001', '40'};
 answer = inputdlg(prompt,dlgtitle,dims,definput);
 subj = str2double(answer{1});
 runnum = str2double(answer{2});
+nTrials = str2double(answer{3}); 
 circleRadius = 50;
 
 % Define color names for the second column 
