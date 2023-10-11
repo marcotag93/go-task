@@ -22,6 +22,13 @@ colorNames = {'grey', 'yellow', 'yellow', 'yellow', 'green(SetPeriod)', 'green',
 spaceKey = KbName('space');
 qKey = KbName('q');
 
+% % Initialization parallel port 
+% ioObj = io64; 
+% status = io64(ioObj);
+% if status ~= 0
+%   error('Failed to initialize io64');
+% end
+
 %% Run 
 
 % Skip sync tests
@@ -68,9 +75,11 @@ for i = 1:nTrials
                     trialType = j;
                     break;
                 elseif keyCode(qKey)
+                    % Save data 
+                    saveTrialData(datadir, subj, runnum, trial_struct);
                     % Close all windows and end the script
                     Screen('CloseAll');
-                    return;
+                    return;     
                 end
             end
         end
@@ -111,18 +120,8 @@ end
 % Save the trial structure to a .mat file
 filename = fullfile(datadir, sprintf('sub%02d_ses%02d.mat', subj, runnum));
 
-% Check if the file already exists
-if isfile(filename)
-    % If the file already exists, append a number to the filename
-    counter = 1;
-    while isfile(filename)
-        filename = fullfile(datadir, sprintf('sub%02d_ses%02d_%d.mat', subj, runnum, counter));
-        counter = counter + 1;
-    end
-end
-
-% Save the file
-save(filename, 'trial_struct');
+% Save data 
+saveTrialData(datadir, subj, runnum, trial_struct); 
 
 % Close the window
 Screen('CloseAll');
