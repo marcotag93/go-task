@@ -4,7 +4,7 @@ This MATLAB script presents an experimental task where participants are shown a 
 
 ## Description
 
-This repository contains a MATLAB script designed for an experimental task where participants view a sequence of colored circles. Participants are required to respond to specific stimuli (green circle) by pressing the spacebar. The script has potential integration points with transcranial magnetic stimulation (TMS) devices.
+This repository contains a MATLAB script designed for an experimental task where participants view a sequence of colored circles. Participants are required to respond to specific stimuli (green circle) by pressing the spacebar. The script has potential integration points with transcranial magnetic stimulation (TMS) devices. 
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ Before running the script, ensure you have the following:
 
 ## Features
 
-- **Stimulus Presentation**: Presents circles in various colors: grey, yellow, and green (plus a white one at the end for transition).
+- **Stimulus Presentation**: Presents circles in various colors: grey, yellow, and green (plus a white one at the end for transition). It is possible to choose a 'fixed' condition (circles duration does not change during the trials) or a 'random' condition (grey and / or yellow circles change their durations during the trials). 
 - **Variable Timing**: The grey circle's appearance duration is random between 1000-3000ms. The yellow circle, which might be associated with a TMS stimulus, also has a variable appearance time. You can easy modify the timing variables inside the function if needed. 
 - **TMS Integration**: Contains commented-out sections for sending signals to a TMS device using the `io64` function. This can be activated for experiments that require TMS stimulation.
 - **Response Collection**: Monitors for keypresses to log reaction times and categorizes responses based on the timing of the keypress in relation to the visual stimulus.
