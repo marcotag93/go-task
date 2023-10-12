@@ -1,6 +1,6 @@
 % Define a function for saving data
-function saveTrialData(datadir, subj, runnum, trial_struct)
-    filename = fullfile(datadir, sprintf('sub%02d_ses%02d.mat', subj, runnum));
+function saveTrialData(datadir, subj, runnum, trial_struct, condition)
+    filename = fullfile(datadir, sprintf('sub%02d_ses%02d_%s.mat', subj, runnum, condition));
 
     % Check if the file already exists
     if isfile(filename)

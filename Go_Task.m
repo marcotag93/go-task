@@ -8,7 +8,7 @@ addpath(genpath(path_functions)); % add folder with functions
 set(0, 'DefaultFigureRenderer', 'opengl'); % 'painters' or 'opengl' 
 
 %% Starting GUI 
-        
+          
 % Create a figure
 f = figure('Position', [300, 300, 400, 300], 'MenuBar', 'none', 'NumberTitle', 'off', 'Name', 'Input');
 
@@ -152,7 +152,7 @@ for i = 1:nTrials
                     break;
                 elseif keyCode(qKey)
                     % Save data 
-                    saveTrialData(datadir, subj, runnum, trial_struct);
+                    saveTrialData(datadir, subj, runnum, trial_struct, condition);
                     % Close all windows and end the script
                     Screen('CloseAll');
                     return;     
@@ -197,7 +197,7 @@ end
 filename = fullfile(datadir, sprintf('sub%02d_ses%02d.mat', subj, runnum));
 
 % Save data 
-saveTrialData(datadir, subj, runnum, trial_struct); 
+saveTrialData(datadir, subj, runnum, trial_struct, condition); 
 
 % Close the window
 Screen('CloseAll');
