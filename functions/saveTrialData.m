@@ -7,7 +7,7 @@ function saveTrialData(datadir, subj, runnum, trial_struct, condition)
         % If the file already exists, append a number to the filename
         counter = 1;
         while isfile(filename)
-            filename = fullfile(datadir, sprintf('sub%02d_ses%02d_%d.mat', subj, runnum, counter));
+            filename = fullfile(datadir, sprintf('sub%02d_ses%02d_%s_%d.mat', subj, runnum, condition, counter));
             counter = counter + 1;
         end
     end
