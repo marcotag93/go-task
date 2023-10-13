@@ -10,7 +10,7 @@ set(0, 'DefaultFigureRenderer', 'opengl'); % 'painters' or 'opengl'
 %% Starting GUI 
           
 % Create a figure
-f = figure('Position', [300, 300, 400, 300], 'MenuBar', 'none', 'NumberTitle', 'off', 'Name', 'Input');
+f = figure('Position', [300, 300, 500, 350], 'MenuBar', 'none', 'NumberTitle', 'off', 'Name', 'Input');
 
 % Create radio buttons in a button group
 bg = uibuttongroup(f, 'Position', [0.05 0.7 0.9 0.25]);
@@ -20,6 +20,9 @@ radio_random = uicontrol(bg, 'Style', 'radiobutton', 'String', 'Random', 'Units'
 % Create and hide grey and yellow checkboxes
 checkbox_grey = uicontrol('Style', 'checkbox', 'String', 'Grey Circle', 'Position', [50, 180, 100, 30], 'Visible', 'off');
 checkbox_yellow = uicontrol('Style', 'checkbox', 'String', 'Yellow Circle', 'Position', [200, 180, 100, 30], 'Visible', 'off');
+
+% Add a checkbox for fullscreen
+checkbox_fullscreen = uicontrol('Style', 'checkbox', 'String', 'Fullscreen', 'Position', [350, 180, 100, 30], 'Value', 1); % Checked by default
 
 % Set the SelectionChangedFcn for the uibuttongroup
 bg.SelectionChangedFcn = @(src, event) updateCheckboxes(event, checkbox_grey, checkbox_yellow, radio_random);
@@ -44,6 +47,7 @@ uiwait(f);
 
 greyChecked = checkbox_grey.Value;
 yellowChecked = checkbox_yellow.Value;
+fullscreenChecked = checkbox_fullscreen.Value; 
 
 % Default values 
 x = 0;
@@ -99,9 +103,12 @@ qKey = KbName('q');
 % Skip sync tests
 Screen('Preference', 'SkipSyncTests', 1);
 
-% Open a new window with a white background
-[window, rect] = Screen('OpenWindow', 0, [255 255 255], [0 0 400 300]); % small window 
-% [window, rect] = Screen('OpenWindow', 0, [255 255 255]);
+% Open a new window
+if fullscreenChecked == 1  % Use the stored value here
+    [window, rect] = Screen('OpenWindow', 0, [255 255 255]);
+else
+    [window, rect] = Screen('OpenWindow', 0, [255 255 255], [0 0 400 300]); % small window 
+end
 
 % Define the circle's center
 [xCenter, yCenter] = RectCenter(rect);
