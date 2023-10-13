@@ -103,6 +103,13 @@ Screen('Preference', 'SkipSyncTests', 1);
 [window, rect] = Screen('OpenWindow', 0, [255 255 255], [0 0 400 300]); % small window 
 % [window, rect] = Screen('OpenWindow', 0, [255 255 255]);
 
+% Calculate the bounds of the text
+[textWidth, textHeight] = RectSize(Screen('TextBounds', window, msg));
+
+% Adjust the starting x and y coordinates to center the text
+xPos = xCenter - textWidth/2;
+yPos = yCenter - textHeight/2;
+
 % Define the circle's center
 [xCenter, yCenter] = RectCenter(rect);
 circleCenter = [xCenter, yCenter];
@@ -178,7 +185,9 @@ for i = 1:nTrials
     elseif trialType == 6
         msg = 'Too late!';
     end
-    DrawFormattedText(window, msg, 'center', 'center');
+    
+    % Draw the centered text
+    Screen('DrawText', window, msg, xPos, yPos, [0 0 0]);  
     Screen('Flip', window);
     
     % Record the trial information
