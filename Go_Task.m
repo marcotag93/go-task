@@ -187,13 +187,12 @@ for i = 1:nTrials
         xPos = xCenter - textWidth/2;
         yPos = yCenter - textHeight/2;
     
-        % Draw the centered text
-        Screen('DrawText', window, msg, xPos, yPos, [0 0 0]);
-        Screen('Flip', window);
     end
     
+    % Draw the centered text
+    Screen('DrawText', window, msg, xPos, yPos, [0 0 0]);
+    Screen('Flip', window);
 
-    
     % Record the trial information
     trial_struct{i, 1} = i; % Trial number
     trial_struct{i, 2} = NaN; % Initialize as NaN
