@@ -1,4 +1,13 @@
 
+%% Setup PTB
+PsychDefaultSetup(1);
+% PerceptualVBLSyncTest % test 
+% OSXCompositorIdiocyTest % test
+
+%% Setup random seed 
+seed = RandStream('mt19937ar','Seed','shuffle');
+RandStream.setGlobalStream(seed);
+
 %% Path
 datadir = pwd;  % current script folder
 path_functions = 'functions';
@@ -55,7 +64,7 @@ c = 0;
 
 if ishandle(f)
     % Retrieve input values
-    subj = str2double(edit_subj.String);
+    subj = edit_subj.String;
     runnum = str2double(edit_runnum.String);
     nTrials = str2double(edit_nTrials.String);
     
@@ -100,8 +109,14 @@ qKey = KbName('q');
 
 %% Run 
 
+HideCursor;
+
 % Skip sync tests
 Screen('Preference', 'SkipSyncTests', 1);
+Screen('Preference', 'ConserveVRAM', 4096);
+Screen('Preference', 'VisualDebugLevel', 1);
+Screen('Preference', 'SuppressAllWarnings', 1);
+
 
 % Open a new window
 if fullscreenChecked == 1  % Use the stored value here
@@ -116,6 +131,19 @@ circleCenter = [xCenter, yCenter];
 
 % Initialize the trial structure
 trial_struct = cell(nTrials, 6);
+
+flipInterval = Screen('GetFlipInterval', window);  % Get refresh rate
+refreshRate = 1 / flipInterval;  % Calculate the refresh rate in Hz
+frameDuration = 1 / refreshRate;  % Duration of each frame in seconds
+
+% Set the desired flip interval (in seconds)
+desiredFlipInterval = 0.01695;  % For a 60 Hz monitor, the flip interval is approximately 0.0167 seconds
+
+% Get the current time
+currentTime = GetSecs;
+
+% Calculate the time for the next flip
+nextFlipTime = currentTime + desiredFlipInterval;
 
 % Run the trials
 for i = 1:nTrials
@@ -147,7 +175,8 @@ for i = 1:nTrials
         [color, respTime, x, c] = getStepParams(j, condition, x, c);
         Screen('FillOval', window, color * 255, ...
                [circleCenter - circleRadius, circleCenter + circleRadius]);
-        Screen('Flip', window);
+        vbl = Screen('Flip', window, nextFlipTime);
+        nextFlipTime = vbl + desiredFlipInterval;
         
         % Wait for the specified time while checking for key press
         while GetSecs - stepStart < respTime / 1000
@@ -198,7 +227,8 @@ for i = 1:nTrials
     
     % Draw the centered text
     Screen('DrawText', window, msg, xPos, yPos, [0 0 0]);
-    Screen('Flip', window);
+    vbl = Screen('Flip', window, nextFlipTime);
+    nextFlipTime = vbl + desiredFlipInterval;
 
     % Record the trial information
     trial_struct{i, 1} = i; % Trial number
@@ -213,10 +243,12 @@ for i = 1:nTrials
 end
 
 % Save the trial structure to a .mat file
-filename = fullfile(datadir, sprintf('sub%02d_ses%02d.mat', subj, runnum));
+filename = fullfile(datadir, sprintf('sub-%s_ses%02d_%s.mat', subj, runnum, condition));  
 
 % Save data 
 saveTrialData(datadir, subj, runnum, trial_struct, condition); 
+
+ShowCursor;
 
 % Close the window
 Screen('CloseAll');
