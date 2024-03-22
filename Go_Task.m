@@ -183,7 +183,10 @@ for i = 1:nTrials
             [keyIsDown, secs, keyCode] = KbCheck;
             if keyIsDown
                 if keyCode(spaceKey)
-                    responseTime = secs - stepStart;
+%                     responseTime = secs - stepStart;
+                    elapsedTimeSinceTrialStart = stepStart - trialStart;  % Time from trial start to this circle's start
+                    immediateResponseTime = secs - stepStart;  % Immediate reaction time from circle's appearance
+                    responseTime = elapsedTimeSinceTrialStart + immediateResponseTime;  % Total reaction time including elapsed time
                     trialType = j;
                     break;
                 elseif keyCode(qKey)
